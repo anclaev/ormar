@@ -1,6 +1,8 @@
 {
   "name": "@ormar/source",
+  "description": "Ormar workspace",
   "version": "0.0.0",
+  "author": "Artem Samarin <iahugo@yandex.ru> (https://t.me/anclaev)",
   "license": "MIT",
   "scripts": {
     "prepare": "husky",
