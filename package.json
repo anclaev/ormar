@@ -6,14 +6,15 @@
     "prepare": "husky",
     "commit": "yarn git-cz",
     "changelog": "yarn conventional-changelog -p nextjs -i CHANGELOG.md -s",
+    "push": "git push --follow-tags origin && git push --follow-tags gitverse",
     "lint": "nx run-many --target=lint --all"
   },
   "private": true,
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog",
-      "disableScopeLowerCase": true,
-      "disableSubjectLowerCase": true
+      "disableScopeLowerCase": false,
+      "disableSubjectLowerCase": false
     }
   },
   "lint-staged": {
