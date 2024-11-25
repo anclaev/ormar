@@ -13,8 +13,13 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ormar/common": ["libs/common/src/index.ts"],
+      "@ormar/config": ["libs/config/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

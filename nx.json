@@ -35,7 +35,19 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/gateway-e2e/**/*"]
+      "exclude": [
+        "apps/gateway-e2e/**/*",
+        "apps/gateway-e2e/**/*",
+        "apps/auth-e2e/**/*",
+        "apps/auth-service-e2e/**/*"
+      ]
     }
-  ]
+  ],
+  "targetDefaults": {
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  }
 }
