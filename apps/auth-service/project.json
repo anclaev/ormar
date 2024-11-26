@@ -21,6 +21,58 @@
           "buildTarget": "auth-service:build:production"
         }
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/auth-service/Dockerfile . -t anclaev/ormar-auth"
+    },
+    "container-local": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "engine": "docker",
+        "metadata": {
+          "images": ["auth-service"],
+          "load": true,
+          "tags": [
+           "anclaev/ormar-auth:dev"
+          ]
+        }
+      }
+    },
+    "container-dev": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "engine": "docker",
+        "metadata": {
+          "push": true,
+          "images": ["auth-service"],
+          "load": true,
+          "tags": [
+            "anclaev/ormar-auth:dev"
+          ],
+          "cache-from": ["type=gha"],
+          "cache-to": ["type=gha,mode=max"]
+        }
+      }
+    },
+    "container": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "engine": "docker",
+        "metadata": {
+          "push": true,
+          "images": ["auth-service"],
+          "load": true,
+          "tags": [
+            "anclaev/ormar-auth:latest"
+          ],
+          "cache-from": ["type=gha"],
+          "cache-to": ["type=gha,mode=max"]
+        }
+      }
     }
   }
 }

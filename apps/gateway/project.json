@@ -8,9 +8,7 @@
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": ["build"],
       "options": {
         "buildTarget": "gateway:build",
         "runBuildTargetDependencies": false
@@ -25,10 +23,56 @@
       }
     },
     "docker-build": {
-      "dependsOn": [
-        "build"
-      ],
-      "command": "docker build -f apps/gateway/Dockerfile . -t gateway"
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/gateway/Dockerfile . -t anclaev/ormar-gateway"
+    },
+    "container-local": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "engine": "docker",
+        "metadata": {
+          "images": ["gateway"],
+          "load": true,
+          "tags": [
+            "anclaev/ormar-gateway:dev"
+          ]
+        }
+      }
+    },
+    "container-dev": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "engine": "docker",
+        "metadata": {
+          "push": true,
+          "images": ["gateway"],
+          "load": true,
+          "tags": [
+            "anclaev/ormar-gateway:dev"
+          ],
+          "cache-from": ["type=gha"],
+          "cache-to": ["type=gha,mode=max"]
+        }
+      }
+    },
+    "container": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "options": {
+        "engine": "docker",
+        "metadata": {
+          "push": true,
+          "images": ["gateway"],
+          "load": true,
+          "tags": [
+            "anclaev/ormar-gateway:latest"
+          ],
+          "cache-from": ["type=gha"],
+          "cache-to": ["type=gha,mode=max"]
+        }
+      }
     }
   }
 }
