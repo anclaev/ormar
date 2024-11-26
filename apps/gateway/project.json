@@ -43,13 +43,13 @@
           "load": true
         },
         "development": {
-          "tags": ["hub.docker.com/anclaev/ormar-gateway:dev"],
+          "tags": ["anclaev/ormar-gateway:dev"],
           "push": true,
           "cache-from": ["type=gha"],
           "cache-to": ["type=gha,mode=max"]
         },
         "production": {
-          "tags": ["hub.docker.com/anclaev/ormar-gateway:latest"],
+          "tags": ["anclaev/ormar-gateway:latest"],
           "push": true,
           "cache-from": ["type=gha"],
           "cache-to": ["type=gha,mode=max"]

@@ -42,13 +42,13 @@
           "push": false
         },
         "development": {
-          "tags": ["hub.docker.com/anclaev/ormar-auth:dev"],
+          "tags": ["anclaev/ormar-auth:dev"],
           "push": true,
           "cache-from": ["type=gha"],
           "cache-to": ["type=gha,mode=max"]
         },
         "production": {
-          "tags": ["hub.docker.com/anclaev/ormar-auth:latest"],
+          "tags": ["anclaev/ormar-auth:latest"],
           "push": true,
           "cache-from": ["type=gha"],
           "cache-to": ["type=gha,mode=max"]
