@@ -27,7 +27,7 @@ async function bootstrap() {
 
   await app
     .listen()
-    .then(() => Logger.log(`Сервис успешно запущен (http://${host}:${port})`))
+    .then(() => Logger.log(`Сервис успешно запущен (http://${host}:${port})!`))
 }
 
 bootstrap()
