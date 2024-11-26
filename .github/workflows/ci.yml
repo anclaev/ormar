@@ -29,13 +29,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: 'Install Dependencies'
-        run: yarn install --frozen-lockfile
+        run: npm install
 
       - name: 'Derive appropriate SHAs for base and head for `nx affected` commands'
         uses: nrwl/nx-set-shas@v3
 
       - name: 'Build images'
-        run: INPUT_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} yarn nx affected --base=$NX_BASE --head=$NX_HEAD --target=container-dev --parallel=2
+        run: INPUT_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} npx nx affected --base=$NX_BASE --head=$NX_HEAD --target=container-dev --parallel=2
