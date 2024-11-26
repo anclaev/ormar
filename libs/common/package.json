@@ -3,5 +3,10 @@
   "version": "0.0.0",
   "author": "Artem Samarin <iahugo@yandex.ru> (https://t.me/anclaev)",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "class-validator": "^0.14.1",
+    "tslib": "^2.3.0",
+    "winston": "^3.17.0"
+  }
 }

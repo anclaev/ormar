@@ -7,11 +7,11 @@ import {
 
 import { IsNumber, IsString } from 'class-validator'
 
-export interface IAuthServiceConfigSchema
+export interface IAuthServiceEnvironment
   extends IServiceEnvironment,
     IDbEnvironment {}
 
-export class AuthServiceConfigSchema implements IAuthServiceConfigSchema {
+export class AuthServiceConfigSchema implements IAuthServiceEnvironment {
   @IsString()
   NODE_ENV: ENV
 
