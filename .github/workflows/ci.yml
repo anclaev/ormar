@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build:
+    name: 'Сборка образов'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,3 +42,17 @@ jobs:
         run: INPUT_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} yarn nx affected --base=origin/master --head=$NX_HEAD --target=container --parallel=2
         env:
           NX_BASE: origin/master
+
+  deploy:
+    name: 'Деплой сервисов'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            cd ${{ secrets.SSH_PATH }}
+            ./dev.sh dev
