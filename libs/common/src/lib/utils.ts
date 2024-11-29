@@ -34,3 +34,6 @@ export function expandObject(
 
   return resObj
 }
+
+export const kafkaEndpoint = () =>
+  `${process.env['KAFKA_HOST']}:${process.env['KAFKA_PORT']}`

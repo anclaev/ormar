@@ -1,5 +1,5 @@
-import { loggerOptionsFactory, SERVICES } from '@ormar/common'
-import { Transport } from '@nestjs/microservices'
+import { kafkaEndpoint, loggerOptionsFactory, SERVICES } from '@ormar/common'
+import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { ConfigService } from '@ormar/config'
 import { WinstonModule } from 'nest-winston'
 import { NestFactory } from '@nestjs/core'
@@ -9,16 +9,23 @@ import { IAuthServiceEnvironment } from './config/schema'
 import { AppModule } from './app/app.module'
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice(AppModule, {
-    transport: Transport.TCP,
-    options: {
-      host: process.env.SERVICE_HOST || 'localhost',
-      port: process.env.SERVICE_PORT || 8001,
-    },
-    logger: WinstonModule.createLogger(
-      loggerOptionsFactory({ service: SERVICES.AUTH_SERVICE })
-    ),
-  })
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    AppModule,
+    {
+      transport: Transport.KAFKA,
+      options: {
+        client: {
+          brokers: [kafkaEndpoint()],
+        },
+        consumer: {
+          groupId: SERVICES.AUTH_SERVICE,
+        },
+      },
+      logger: WinstonModule.createLogger(
+        loggerOptionsFactory({ service: SERVICES.AUTH_SERVICE })
+      ),
+    }
+  )
 
   const config = app.get(ConfigService)
 
@@ -27,7 +34,9 @@ async function bootstrap() {
 
   await app
     .listen()
-    .then(() => Logger.log(`Сервис успешно запущен (${host}:${port})!`))
+    .then(() =>
+      Logger.log(`Сервис авторизации успешно запущен (${host}:${port})!`)
+    )
 }
 
 bootstrap()

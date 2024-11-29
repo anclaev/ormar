@@ -41,7 +41,7 @@ async function bootstrap() {
 
   await app
     .listen(port)
-    .then(() => Logger.log(`Шлюз успешно запущен (https://${host})!`))
+    .then(() => Logger.log(`Шлюз успешно запущен (https://${host}:${port})!`))
 }
 
 bootstrap()

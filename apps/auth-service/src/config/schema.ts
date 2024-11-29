@@ -21,6 +21,12 @@ export class AuthServiceConfigSchema implements IAuthServiceEnvironment {
   @IsNumber({}, { message: VALIDATION_ERRORS.SERVICE_PORT_NOT_PROVIDED })
   SERVICE_PORT: number
 
+  @IsString({ message: VALIDATION_ERRORS.KAFKA_HOST_NOT_PROVIDED })
+  KAFKA_HOST: string
+
+  @IsNumber({}, { message: VALIDATION_ERRORS.KAFKA_PORT_PROVIDED })
+  KAFKA_PORT: number
+
   @IsString({ message: VALIDATION_ERRORS.DB_NAME_NOT_PROVIDED })
   DB_NAME: string
 

@@ -32,6 +32,12 @@ export class ServiceEnvironmentValidationSchema implements IServiceEnvironment {
 
   @IsNumber({}, { message: VALIDATION_ERRORS.SERVICE_PORT_NOT_PROVIDED })
   SERVICE_PORT: number
+
+  @IsString({ message: VALIDATION_ERRORS.KAFKA_HOST_NOT_PROVIDED })
+  KAFKA_HOST: string
+
+  @IsNumber({}, { message: VALIDATION_ERRORS.KAFKA_PORT_PROVIDED })
+  KAFKA_PORT: number
 }
 
 export class DbEnvironmentValidationSchema implements IDbEnvironment {

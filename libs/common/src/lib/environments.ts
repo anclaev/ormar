@@ -12,6 +12,8 @@ export interface IEnvironment {
 export interface IServiceEnvironment extends IEnvironment {
   SERVICE_HOST: string
   SERVICE_PORT: number
+  KAFKA_HOST: string
+  KAFKA_PORT: number
 }
 
 export interface IDbEnvironment extends IEnvironment {
